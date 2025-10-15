@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDS Trinity</title>
+    <link rel="icon" type="image/png" href="Images/Icon.png">
+    <style>
+        body {
+            background-color: #D3D3D3;
+            color: #000000;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            background-color: #808080;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: #000000;
+        }
+        .sections-container {
+    position: relative;
+    min-height: 600px;
+        }
+        
+   .hidden {
+    display: none;
+}
+.benefit {
+    margin-bottom: 15px;
+}
+.benefit-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+.benefit-bar {
+    display: block;
+    height: 10px;
+    background-color: #808080;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+.benefit p {
+    margin: 0;
+    font-size: 14px;
+}
+.tab, button, .benefit-bar {
+    transition: all 0.3s ease;
+}
+.tab:hover, button:hover {
+    transform: translateY(-2px);
+}
+
+.benefit-bar {
+    transition: width 0.6s ease-in-out;
+}
+
+.section, .results-container, .form-group input, select, button {
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+.results-container {
+    padding: 20px;
+}
+
+button {
+    background-color: #808080;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+button:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+}
+.section {
+    position: absolute;
+    top: 0px; /* or whatever distance from top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    display: none;
+}
+.section.active {
+    display: block;
+}
+
+
+
+
+
+
+
+.section {
+    display: none;          /* hidden by default */
+    background-color: #ffffff;
+    padding: 15px;
+    max-width: 600px;
+    margin: 20px auto;      /* centers horizontally */
+    border: 2px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.section.active {
+    display: block;
+}
+
+        .sleep-form {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            text-align: left;
+            padding: 10px;
+        }
+        .diet-form {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            text-align: left;
+            padding: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="number"], .form-group select {
+            width: 80px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .input-with-unit {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.input-with-unit select {
+    width: 60px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+        .gender-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .gender-input input[type="radio"] {
+            margin-right: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 5px;
+            margin-top: 15px;
+            background-color: #808080;
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #000000;
+        }
+        footer {
+            margin-top: 200px;
+            font-size: 12px;
+            color: #808080;
+            text-align: center;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        .risk {
+            color: #FF0000;
+        }
+        .ref-toggle {
+            background-color: #808080;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .ref-toggle:hover {
+            background-color: #000000;
+        }
+        .ref-list {
+            display: none;
+        }
+        .ref-list.show {
+            display: block;
+        }
+        #sleep {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .results-container {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background-color: #FFFFFF;
+            border: 1px solid #000000;
+            padding: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .results-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .results-container::-webkit-scrollbar-track {
+            background: #D3D3D3;
+        }
+        .results-container::-webkit-scrollbar-thumb {
+            background: #808080;
+            border-radius: 4px;
+        }
+        .results-container::-webkit-scrollbar-thumb:hover {
+            background: #000000;
+        }
+        @media (max-width: 600px) {
+    .sections-container {
+        margin-top: 0;
+    }
+    #sleep, #diet {
+        flex-direction: column;
+        align-items: center;
+    }
+    .sleep-form, .diet-form, .results-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .section {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+    }
+}
+        
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="Images/Final Version Horizontal Transparent.png" alt="EDS Trinity Logo" width="300">
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="showSection('sleep')">Sleep</div>
+        <div class="tab" onclick="showSection('diet')">Diet</div>
+        <div class="tab" onclick="showSection('exercise')">Exercise</div>
+    </div>
+
+    <div class="sections-container">
+    <div id="sleep" class="section active">
+    <div class="sleep-form">
+        <form onsubmit="calculateSleep(event)">
+            <div class="form-group">
+                <label for="sleepHours">Average Sleep Hours:</label>
+                <input type="number" id="sleepHours" step="0.1" min="0" max="24" required>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="gender-input">
+                    <label><input type="radio" name="gender" id="male" value="male" checked> Male</label>
+                    <label><input type="radio" name="gender" id="female" value="female"> Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sleep-age">Age:</label>
+                <input type="number" id="sleep-age" min="0" max="120" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+    <div class="results-container">
+        <div id="sleepResult"></div>
+    </div>
+</div>
+
+<div id="diet" class="section">
+    <div class="diet-form">
+        <form onsubmit="calculateDiet(event)">
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <div class="input-with-unit">
+                    <input type="number" id="weight" step="0.1" min="0" max="1102" required>
+                    <select id="weight-unit">
+                        <option value="kg" selected>kg</option>
+                        <option value="lbs">lbs</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="goal">Goal:</label>
+                <select id="goal" required>
+                    <option value="extreme-bulking">Extreme Bulking</option>
+                    <option value="moderate-bulking">Moderate Bulking</option>
+                    <option value="maintenance" selected>Maintenance</option>
+                    <option value="moderate-loss">Moderate Weight Loss</option>
+                    <option value="extreme-loss">Extreme Weight Loss</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" step="0.1" min="0" max="300" required>
+            </div>
+            <div class="form-group">
+                <label for="diet-age">Age:</label>
+                <input type="number" id="diet-age" step="1" min="0" max="120" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <div class="gender-input">
+                    <label><input type="radio" name="sex" id="male" value="male" checked> Male</label>
+                    <label><input type="radio" name="sex" id="female" value="female"> Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="activity">Activity Level:</label>
+                <select id="activity" required>
+                    <option value="low"selected>Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+    <div class="results-container">
+        <div id="dietResult"></div>
+
+    </div>
+</div>
+
+<div id="exercise" class="section">
+    <!-- User input form -->
+    <div class="exercise-form">
+        <form onsubmit="calculateExerciseProjections(); return false;">
+            <div class="form-group">
+                <label for="cardioSessions">Cardio sessions per week:</label>
+                <input type="number" id="cardioSessions" min="0" max="14" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="resistanceSessions">Resistance sessions per week:</label>
+                <input type="number" id="resistanceSessions" min="0" max="14" step="1" required>
+            </div>
+            <button type="submit">Calculate Projections</button>
+        </form>
+    </div>
+
+    <!-- Static benefits panel -->
+    <div class="results-container" id="exerciseBenefits">
+        <h3>Exercise Benefits</h3>
+
+        <!-- Timeframe selector -->
+        <div class="form-group">
+            <label for="benefitTimeframe">Select Timeframe:</label>
+            <select id="benefitTimeframe" onchange="updateExerciseBenefits()">
+                <option value="1Month">1 Month</option>
+                <option value="3Months">3 Months</option>
+                <option value="1Year">1 Year</option>
+            </select>
+        </div>
+
+        <!-- Benefits -->
+        <div class="benefit">
+            <span class="benefit-title">VO₂ Max</span>
+            <span class="benefit-bar" id="vo2Bar" style="width:0%;"></span>
+            <span class="benefit-percent" id="vo2Percent">0%</span>
+        </div>
+
+        <div class="benefit">
+            <span class="benefit-title">Basal Metabolic Rate</span>
+            <span class="benefit-bar" id="bmrBar" style="width:0%;"></span>
+            <span class="benefit-percent" id="bmrPercent">0%</span>
+        </div>
+
+        <div class="benefit">
+            <span class="benefit-title">Muscle Mass & Strength</span>
+            <span class="benefit-bar" id="muscleBar" style="width:0%;"></span>
+            <span class="benefit-percent" id="musclePercent">0%</span>
+        </div>
+
+        <div class="benefit">
+            <span class="benefit-title">Body Fat Reduction</span>
+            <span class="benefit-bar" id="bodyFatBar" style="width:0%;"></span>
+            <span class="benefit-percent" id="bodyFatPercent">0%</span>
+        </div>
+
+        <div class="benefit">
+            <span class="benefit-title">Bone Density</span>
+            <span class="benefit-bar" id="boneBar" style="width:0%;"></span>
+            <span class="benefit-percent" id="bonePercent">0%</span>
+        </div>
+    </div>
+
+
+
+    <!-- Dynamic projections output -->
+    <div id="exerciseResults" class="results-container" style="margin-top:20px;">
+        <!-- Accumulated sessions -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+    </div>
+</div>
+
+    <footer>
+    <button class="ref-toggle" onclick="toggleReferences()">Show References</button>
+
+    <div id="sleep-references" class="ref-list">
+        <p><small>Sleep References:</small></p>
+        <p><small>Cancer Risk: Fernandez-Mendoza, J., et al. (2019). Journal of the American Heart Association.</small></p>
+        <p><small>Alzheimer’s Risk: Ma, L., et al. (2021). Ageing Research Reviews.</small></p>
+        <p><small>Diabetes Risk: Shan, Z., et al. (2015). Diabetes Care.</small></p>
+        <p><small>Depression Risk: Zhai, L., et al. (2015). Depression and Anxiety.</small></p>
+        <p><small>Obesity Risk: Spiegel, K., et al. (2004). Annals of Internal Medicine.</small></p>
+        <p><small>Infection Risk: Prather, A. A., et al. (2015). Sleep.</small></p>
+        <p><small>Memory Impairment Risk: Newbury, C. R., et al. (2019). Journal of Sleep Research.</small></p>
+        <p><small>Athletic Performance: Fullagar, H. H. K., et al. (2015). Sports Medicine.</small></p>
+        <p><small>Colorectal Cancer Risk: Lu, Y., et al. (2013). PLoS One.</small></p>
+        <p><small>Mental Control Reduction Risk: Yoo, S. S., et al. (2007). Nature Neuroscience.</small></p>
+        <p><small>Learning and Retention Risk: Creswell et al. (2023). Proceedings of the National Academy of Sciences.</small></p>
+        <p><small>Coronary Heart Disease Risk: Wang et al. (2016). International Journal of Cardiology.</small></p>
+        <p><small>Sperm Count: Chen et al. (2017). Sleep Medicine.</small></p>
+        <p><small>Reproductive Hormone Production: Kim et al. (2019). Sleep.</small></p>
+        <p><small>Issues with Getting Pregnant: Willis et al. (2018). Epidemiology.</small></p>
+    </div>
+
+    <div id="diet-references" class="ref-list">
+        <p><small>Book: Pollan, M. (2008). *In Defense of Food: An Eater’s Manifesto*. Penguin Press.</small></p>
+        <p><small>Book: Taubes, G. (2007). *Good Calories, Bad Calories: Fats, Carbs, and the Controversial Science of Diet and Health*. Knopf.</small></p>
+        <p><small>YouTube Video: Hormozi, A. *How to eat for performance* [Video]. YouTube. https://www.youtube.com/watch?v=fxyhIXZ6Yog</small></p>
+        <p><small>YouTube Video: *Muscle building science explained* [Video]. YouTube. https://youtu.be/n28W4AmvMDE</small></p>
+        <p><small>Article: Lamont, L. S., et al. (2001). Gender differences in protein metabolism. *Current Opinion in Clinical Nutrition and Metabolic Care*, 4(6), 521–526. https://journals.lww.com/co-clinicalnutrition/abstract/2001/11000/gender_differences_in_protein_metabolism.5.aspx</small></p>
+        <p><small>Article: Zhao, Y., et al. (2024). Association of dietary habits with body composition in adults. *Scientific Reports*, 14, Article 62639. https://www.nature.com/articles/s41598-024-62639-2</small></p>
+        <p><small>Article: Mayo Clinic Health System. (n.d.). Assessing protein needs for performance. https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/assessing-protein-needs-for-performance</small></p>
+        <p><small>Article: Tarnopolsky, M. A. (2001). Protein requirements for endurance athletes. *Nutrition*, 17(7–8), 553–555. https://pubmed.ncbi.nlm.nih.gov/11706282/</small></p>
+
+        <p><small>Diet References:</small></p>
+        <!-- You will paste your diet references here -->
+    </div>
+</footer>
+
+    <script>
+    function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+            section.style.opacity = '0';
+        });
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.classList.add('active');
+            setTimeout(() => {
+                selectedSection.style.opacity = '1';
+            }, 50);
+            const tab = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (tab) tab.classList.add('active');
+        }
+    }
+
+    function calculateSleep(event) {
+        event.preventDefault();
+        const hours = parseFloat(document.getElementById('sleepHours').value);
+        const gender = document.querySelector('input[name="gender"]:checked').value;
+        const age = parseInt(document.getElementById('sleep-age').value);
+        let result = '';
+
+        // Validate age
+        if (isNaN(age) || age < 0 || age > 120) {
+            result = 'Please enter a valid age (0–120).';
+            document.getElementById('sleepResult').innerHTML = result;
+            return;
+        }
+
+        const risks = [
+            { name: 'infection', percent: 420 },
+            { name: 'cancer', percent: 41 },
+            { name: 'Alzheimer’s', percent: 40 },
+            { name: 'heart disease', percent: 27 },
+            { name: 'diabetes', percent: 28 },
+            { name: 'depression', percent: 31 },
+            { name: 'memory', percent: 35 },
+            { name: 'learning', percent: 40 },
+            { name: 'obesity', percent: 24 },
+            { name: 'mental control reduction', percent: 60 },
+            { name: '% reduction in sperm count', percent: 30 },
+            { name: '% reduction in hormone production', percent: 20 },
+            { name: 'athletic performance', percent: 30 },
+            { name: 'pregnancy issues', percent: 25 }
+        ];
+
+        if (hours >= 7) {
+            result = `No risks found`;
+        } else {
+            // Filter risks based on gender
+            const filteredRisks = risks.filter(risk => {
+                if (gender === 'male' && risk.name === 'pregnancy issues') {
+                    return false; // Exclude for males
+                }
+                if (gender === 'female' && risk.name === '% reduction in sperm count') {
+                    return false; // Exclude for females
+                }
+                return true;
+            });
+
+            // Apply age-based scaling
+            filteredRisks.forEach(risk => {
+                let ageScaledPercent = risk.percent;
+                if (age <= 35) {
+                    // Young: Boost athletic performance, fertility risks
+                    if (risk.name === 'athletic performance') {
+                        ageScaledPercent *= 1.2; // +20%
+                    } else if (risk.name === '% reduction in sperm count' || risk.name === 'pregnancy issues' || risk.name === '% reduction in hormone production') {
+                        ageScaledPercent *= 1.1; // +10%
+                    }
+                } else if (age >= 61) {
+                    // Older: Boost Alzheimer’s, heart disease, cancer, memory
+                    if (risk.name === 'Alzheimer’s') {
+                        ageScaledPercent *= 1.2; // +20%
+                    } else if (risk.name === 'heart disease') {
+                        ageScaledPercent *= 1.15; // +15%
+                    } else if (risk.name === 'cancer' || risk.name === 'memory') {
+                        ageScaledPercent *= 1.1; // +10%
+                    }
+                }
+                // Apply hours-based scaling
+                let scaledPercent;
+                if (hours >= 5 && hours < 7) {
+                    scaledPercent = ageScaledPercent * (7 - hours) / 2;
+                } else if (hours < 5) {
+                    const k = Math.log(2) / 5;
+                    scaledPercent = ageScaledPercent * Math.exp(k * (5 - hours));
+                } else {
+                    scaledPercent = ageScaledPercent;
+                }
+                scaledPercent = Math.min(Math.round(scaledPercent), 1000);
+                // Handle reduction risks vs. others
+                if (risk.name.startsWith('% reduction') || risk.name === 'mental control reduction') {
+                    result += `<span class="risk">-${scaledPercent}% ${risk.name.replace('% reduction in ', '')}</span><br>`;
+                } else {
+                    result += `<span class="risk">+${scaledPercent}% ${risk.name} risk</span><br>`;
+                }
+            });
+        }
+
+        document.getElementById('sleepResult').innerHTML = result;
+    }
+
+    function toggleReferences() {
+    const sleepRef = document.getElementById('sleep-references');
+    const dietRef = document.getElementById('diet-references');
+    const button = document.querySelector('.ref-toggle');
+
+    // Determine which tab is active
+    const activeTab = document.querySelector('.tab.active').textContent.trim().toLowerCase();
+
+    // Toggle the correct reference list
+    if (activeTab === 'sleep') {
+        if (sleepRef.classList.contains('show')) {
+            sleepRef.classList.remove('show');
+            button.textContent = 'Show References';
+        } else {
+            sleepRef.classList.add('show');
+            dietRef.classList.remove('show');
+            button.textContent = 'Hide References';
+        }
+    } else if (activeTab === 'diet') {
+        if (dietRef.classList.contains('show')) {
+            dietRef.classList.remove('show');
+            button.textContent = 'Show References';
+        } else {
+            dietRef.classList.add('show');
+            sleepRef.classList.remove('show');
+            button.textContent = 'Hide References';
+        }
+    } else {
+        // For tabs like Exercise, hide all
+        sleepRef.classList.remove('show');
+        dietRef.classList.remove('show');
+        button.textContent = 'Show References';
+    }
+}
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSection('sleep');
+    });
+
+    document.addEventListener('submit', (event) => {
+        if (event.target.closest('#diet')) {
+            showSection('diet');
+        }
+    });
+
+    function calculateDiet(event) {
+    event.preventDefault();
+    try {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const weightUnit = document.getElementById('weight-unit').value;
+        const goal = document.getElementById('goal').value;
+        const height = parseFloat(document.getElementById('height').value);
+        const age = parseFloat(document.getElementById('diet-age').value);
+        const sex = document.querySelector('input[name="sex"]:checked')?.value;
+        const activity = document.getElementById('activity').value;
+        let result = '';
+
+        // Debug all inputs
+        console.log('Inputs:', { weight, weightUnit, goal, height, age, sex, activity });
+
+        // Convert weight to kg and lbs
+        const weightInKg = weightUnit === 'lbs' ? weight / 2.20462 : weight;
+        const weightInLbs = weightUnit === 'kg' ? weight * 2.20462 : weight;
+
+        // Validate inputs
+        if (isNaN(weight) || weight <= 0 || weightInLbs > 1102 || (weightUnit === 'kg' && weight > 500)) {
+            result = 'Please enter a valid weight (0–500 kg or 0–1102 lbs).';
+        } else if (!goal || !['extreme-loss', 'moderate-loss', 'maintenance', 'moderate-bulking', 'extreme-bulking'].includes(goal)) {
+            result = 'Please select a valid goal.';
+        } else if (isNaN(height) || height <= 0 || height > 300) {
+            result = 'Please enter a valid height (0–300 cm).';
+        } else if (isNaN(age) || age < 0 || age > 120) {
+            result = 'Please enter a valid age (0–120).';
+        } else if (!sex || (sex !== 'male' && sex !== 'female')) {
+            result = 'Please select a sex.';
+        } else if (!activity || !['low', 'medium', 'high'].includes(activity)) {
+            result = 'Please select an activity level.';
+        } else {
+            // Define zones and multipliers
+            const zones = {
+                'extreme-loss': { name: 'Extreme Weight Loss', min: 7, max: 9 },
+                'moderate-loss': { name: 'Moderate Weight Loss', min: 10, max: 12 },
+                'maintenance': { name: 'Maintenance', min: 13, max: 15 },
+                'moderate-bulking': { name: 'Moderate Bulking', min: 16, max: 18 },
+                'extreme-bulking': { name: 'Extreme Bulking', min: 19, max: 21 }
+            };
+
+            // Calculate base calorie range
+            let minCalories = Math.round(weightInLbs * zones[goal].min);
+            let maxCalories = Math.round(weightInLbs * zones[goal].max);
+
+            // Adjust calories based on activity level
+            let activityMultiplier = 1.0; // Low (default) = no change
+            if (activity === 'medium') {
+                activityMultiplier = 1.1; // +10%
+            } else if (activity === 'high') {
+                activityMultiplier = 1.2; // +20%
+            }
+            minCalories = Math.round(minCalories * activityMultiplier);
+            maxCalories = Math.round(maxCalories * activityMultiplier);
+
+            // Apply 2% caloric reduction per decade of age
+            const decades = Math.floor(age / 10); // e.g., age 35 -> 3 decades
+            const ageReduction = 1 - (0.02 * decades); // e.g., 3 decades -> 6% reduction
+            minCalories = Math.round(minCalories * ageReduction);
+            maxCalories = Math.round(maxCalories * ageReduction);
+
+            // Apply 23% reduction for female users
+            let sexMultiplier = sex === 'female' ? 0.77 : 1.0; // 23% reduction if female
+            minCalories = Math.round(minCalories * sexMultiplier);
+            maxCalories = Math.round(maxCalories * sexMultiplier);
+
+            // Calculate protein based on activity level (in g/kg)
+            let proteinPerKg;
+            if (activity === 'low') {
+                proteinPerKg = 1.6;
+            } else if (activity === 'medium') {
+                proteinPerKg = 2.0;
+            } else if (activity === 'high') {
+                proteinPerKg = 2.4;
+            }
+            let protein = Math.round(weightInKg * proteinPerKg);
+
+            // Apply 23% reduction to protein for female users
+            protein = Math.round(protein * sexMultiplier);
+
+            // Format result
+            result = `
+                Goal: ${zones[goal].name}<br>
+                Calories: ${minCalories}–${maxCalories} kcal/day<br>
+                Protein: ${protein}g
+            `;
+        }
+
+        document.getElementById('dietResult').innerHTML = result;
+    } catch (error) {
+        console.error('Error in calculateDiet:', error);
+        document.getElementById('dietResult').innerHTML = 'An error occurred. Please check your inputs.';
+    }
+}
+// Define benefit ranges per timeframe
+const exerciseRanges = {
+    VO2Max: { "1Month": 7, "3Months": 15, "1Year": 25 },
+    BMR: { "1Month": 2, "3Months": 5, "1Year": 10 },
+    Muscle: { "1Month": 4, "3Months": 12, "1Year": 30 },
+    BodyFat: { "1Month": 1.6, "3Months": 4.8, "1Year": 10 },
+    Bone: { "1Month": 0.6, "3Months": 1.8, "1Year": 5 }
+};
+
+// Store last entered inputs
+let currentCardio = 0;
+let currentResistance = 0;
+
+function calculateExerciseProjections() {
+    currentCardio = parseInt(document.getElementById("cardioSessions").value) || 0;
+    currentResistance = parseInt(document.getElementById("resistanceSessions").value) || 0;
+
+    // Update bars for default timeframe
+    updateExerciseBenefits();
+
+    // Accumulated sessions per timeframe
+    const TIMEFRAME_WEEKS = {
+        "1Month": 4,
+        "3Months": 13,
+        "1Year": 52
+    };
+
+    let result = "<h3>Accumulated Training Sessions</h3>";
+    for (const [label, weeks] of Object.entries(TIMEFRAME_WEEKS)) {
+        const cardioTotal = currentCardio * weeks;
+        const resistanceTotal = currentResistance * weeks;
+
+        result += `
+            <p><strong>${label.replace(/([A-Z])/g, ' $1').trim()}:</strong></p>
+            <ul>
+                <li>Cardio sessions: ${cardioTotal}</li>
+                <li>Resistance sessions: ${resistanceTotal}</li>
+            </ul>
+        `;
+    }
+    document.getElementById("exerciseResults").innerHTML = result;
+}
+
+function updateExerciseBenefits() {
+    const timeframe = document.getElementById("benefitTimeframe").value;
+
+    // Calculate percentages based on entered sessions
+    const vo2 = Math.min(exerciseRanges.VO2Max[timeframe] * (currentCardio / 3), 100).toFixed(1);
+    const bmr = Math.min(exerciseRanges.BMR[timeframe] * (currentResistance / 2), 100).toFixed(1);
+    const muscle = Math.min(exerciseRanges.Muscle[timeframe] * (currentResistance / 2), 100).toFixed(1);
+    const bodyFat = Math.min(exerciseRanges.BodyFat[timeframe] * (currentResistance / 2), 100).toFixed(1);
+    const bone = Math.min(exerciseRanges.Bone[timeframe] * (currentResistance / 2), 100).toFixed(1);
+
+    // Update bars
+    document.getElementById("vo2Bar").style.width = vo2 + "%";
+    document.getElementById("vo2Percent").textContent = vo2 + "%";
+
+    document.getElementById("bmrBar").style.width = bmr + "%";
+    document.getElementById("bmrPercent").textContent = bmr + "%";
+
+    document.getElementById("muscleBar").style.width = muscle + "%";
+    document.getElementById("musclePercent").textContent = muscle + "%";
+
+    document.getElementById("bodyFatBar").style.width = bodyFat + "%";
+    document.getElementById("bodyFatPercent").textContent = bodyFat + "%";
+
+    document.getElementById("boneBar").style.width = bone + "%";
+    document.getElementById("bonePercent").textContent = bone + "%";
+}
+
+// Initialize bars on page load
+document.addEventListener("DOMContentLoaded", () => {
+    updateExerciseBenefits();
+});
+
+
+
+
+
+function toggleVisibility(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden');
+}
+
+
+</script>
+</body>
+</html>
