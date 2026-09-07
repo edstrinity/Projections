@@ -351,6 +351,18 @@ button:hover {
                     <option value="high">High</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="meals">Number of Meals:</label>
+                <select id="meals" required>
+                    <option value="" selected disabled>Select…</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
             <button type="submit">Calculate</button>
         </form>
     </div>
@@ -645,10 +657,12 @@ button:hover {
         const age = parseFloat(document.getElementById('diet-age').value);
         const sex = document.querySelector('input[name="sex"]:checked')?.value;
         const activity = document.getElementById('activity').value;
+        const mealsValue = document.getElementById('meals').value;
+        const meals = parseInt(mealsValue);
         let result = '';
 
         // Debug all inputs
-        console.log('Inputs:', { weight, weightUnit, goal, height, age, sex, activity });
+        console.log('Inputs:', { weight, weightUnit, goal, height, age, sex, activity, meals });
 
         // Convert weight to kg and lbs
         const weightInKg = weightUnit === 'lbs' ? weight / 2.20462 : weight;
@@ -667,6 +681,8 @@ button:hover {
             result = 'Please select a sex.';
         } else if (!activity || !['low', 'medium', 'high'].includes(activity)) {
             result = 'Please select an activity level.';
+        } else if (!mealsValue || isNaN(meals) || meals < 1 || meals > 6) {
+            result = 'Please select a number of meals (1–6).';
         } else {
             // Define zones and multipliers
             const zones = {
@@ -716,11 +732,20 @@ button:hover {
             // Apply 23% reduction to protein for female users
             protein = Math.round(protein * sexMultiplier);
 
+            // Per-meal breakdown (even split across chosen meal count)
+            const minCaloriesPerMeal = Math.round(minCalories / meals);
+            const maxCaloriesPerMeal = Math.round(maxCalories / meals);
+            const proteinPerMeal = Math.round(protein / meals);
+
             // Format result
             result = `
                 Goal: ${zones[goal].name}<br>
                 Calories: ${minCalories}–${maxCalories} kcal/day<br>
-                Protein: ${protein}g
+                Protein: ${protein}g<br>
+                <br>
+                <strong>Per Meal (×${meals}):</strong><br>
+                Calories: ${minCaloriesPerMeal}–${maxCaloriesPerMeal} kcal<br>
+                Protein: ${proteinPerMeal}g
             `;
         }
 
